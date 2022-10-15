@@ -8,6 +8,8 @@ import se331.rest.entity.Event;
 import se331.rest.entity.Organizer;
 import se331.rest.repository.EventRepository;
 import se331.rest.repository.OrganizerRepository;
+import se331.rest.security.repository.AuthorityRepository;
+import se331.rest.security.repository.UserRepository;
 
 import javax.transaction.Transactional;
 
@@ -19,6 +21,10 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     @Autowired
     OrganizerRepository organizerRepository;
 
+    @Autowired
+    AuthorityRepository authorityRepository;
+    @Autowired
+    UserRepository userRepository;
     @Override
     @Transactional
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
@@ -74,5 +80,6 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .organizer(org3)
                 .build());
         org3.getOwnEvents().add(tempEvent);
+
     }
 }
