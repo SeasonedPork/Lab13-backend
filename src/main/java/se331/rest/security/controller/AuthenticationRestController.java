@@ -38,7 +38,6 @@ public class AuthenticationRestController {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
     @Autowired
     UserRepository userRepository;
 
@@ -59,6 +58,10 @@ public class AuthenticationRestController {
         final String token = jwtTokenUtil.generateToken(userDetails);
         Map result = new HashMap();
         result.put("token", token);
+//        User user = userRepository.findById(((JwtUser)
+//        userDetails).getId()).orElse(null){
+//
+//        }
         User user = userRepository.findById(((JwtUser) userDetails).getId()).orElse(null);
         if (user.getOrganizer() != null) {
             result.put("user", LabMapper.INSTANCE.getOrganizerAuthDTO( user.getOrganizer()));
